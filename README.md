@@ -20,7 +20,7 @@ A simple and intelligent chatbot application.
 
 1. Clone this repository
 ```
-git clone https://github.com/yourusername/chatbot.git
+git clone https://github.com/alanscode/chatbot.git
 cd chatbot
 ```
 
@@ -44,4 +44,4 @@ yarn start
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details. 
+This project is licensed under the MIT License - see the LICENSE file for details.
