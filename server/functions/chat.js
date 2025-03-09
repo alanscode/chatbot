@@ -44,10 +44,17 @@ exports.handler = async (event, context) => {
       };
     }
 
+    // Clean the messages to remove any fields not accepted by Anthropic
+    const cleanedMessages = messages.map(message => ({
+      role: message.role,
+      content: message.content
+      // Only include fields that Anthropic accepts
+    }));
+
     const response = await anthropic.messages.create({
       model: 'claude-3-7-sonnet-20240307',
       max_tokens: 4000,
-      messages,
+      messages: cleanedMessages,
     });
 
     return {
