@@ -45,11 +45,29 @@ exports.handler = async (event, context) => {
     }
 
     // Clean the messages to remove any fields not accepted by Anthropic
-    const cleanedMessages = messages.map(message => ({
-      role: message.role,
-      content: message.content
-      // Only include fields that Anthropic accepts
-    }));
+    // AND filter out messages with empty content (except possibly the last assistant message)
+    const cleanedMessages = messages
+      .filter((message, index) => {
+        // Keep messages with non-empty content
+        if (message.content && message.content.trim() !== '') {
+          return true;
+        }
+        // Allow empty content only for the last message if it's from the assistant
+        return index === messages.length - 1 && message.role === 'assistant';
+      })
+      .map(message => ({
+        role: message.role,
+        content: message.content || ''
+      }));
+
+    // Ensure we have at least one message
+    if (cleanedMessages.length === 0) {
+      return {
+        statusCode: 400,
+        headers,
+        body: JSON.stringify({ error: 'Invalid request. At least one message with content is required.' }),
+      };
+    }
 
     const response = await anthropic.messages.create({
       model: 'claude-3-7-sonnet-20240307',
