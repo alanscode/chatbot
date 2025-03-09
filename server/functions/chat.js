@@ -56,14 +56,15 @@ exports.handler = async (event, context) => {
       body: JSON.stringify(response),
     };
   } catch (error) {
-    console.error('Error processing request:', error);
+    console.error('Error details:', error);
     
     return {
       statusCode: 500,
       headers,
       body: JSON.stringify({
         error: 'Server error',
-        message: process.env.NODE_ENV === 'development' ? error.message : 'An unexpected error occurred',
+        message: error.message || 'An unexpected error occurred',
+        details: process.env.NODE_ENV === 'development' ? error.toString() : undefined
       }),
     };
   }
