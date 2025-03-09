@@ -153,6 +153,6 @@ const debugStreamRequest = (messages: Message[], options: ChatOptions): void => 
   console.log('Last few messages:', lastMessages.map(m => ({
     role: m.role,
     contentLength: m.content ? m.content.length : 0,
-    contentPreview: m.content ? `${m.content.substring(0, 50)}...` : 'empty'
+    contentPreview: typeof m.content === 'string' ? `${m.content.substring(0, 50)}...` : 'empty or not a string'
   })));
 }; 
