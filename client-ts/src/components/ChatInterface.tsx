@@ -34,7 +34,7 @@ const ChatInterface: React.FC = () => {
       {/* Header */}
       <div className="flex justify-between items-center p-4 border-b border-slate-700 bg-slate-800/50 backdrop-blur-sm">
         <div className="flex items-center space-x-3">
-          <div className="w-3 h-3 bg-purple-500 rounded-full animate-pulse"></div>
+          <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
           <h2 className="text-lg font-medium text-white">Virtual Assistant</h2>
         </div>
         {messages.length > 0 && (
