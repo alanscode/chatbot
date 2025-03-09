@@ -38,7 +38,18 @@ interface ChatProviderProps {
 }
 
 export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<Message[]>(() => {
+    try {
+      const storedMessages = JSON.parse(localStorage.getItem('chatMessages') || '[]');
+      return storedMessages.map((msg: any) => ({
+        ...msg,
+        content: typeof msg.content === 'string' ? msg.content.trim() : msg.content
+      }));
+    } catch (error) {
+      console.error('Error loading messages:', error);
+      return [];
+    }
+  });
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   
@@ -47,7 +58,11 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
     try {
       const savedMessages = localStorage.getItem('chatMessages');
       if (savedMessages) {
-        setMessages(JSON.parse(savedMessages));
+        const initialMessages = JSON.parse(savedMessages).map((e: Message) => ({
+          ...e,
+          content: typeof e.content === 'string' ? e.content.trim() : e.content
+        }));
+        setMessages(initialMessages);
       }
     } catch (e) {
       console.error('Error loading saved messages:', e);
@@ -64,26 +79,32 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
     }
   }, [messages]);
   
-  const addMessage = (message: Message) => {
+  const addMessage = (newMessage: Message) => {
+    // Make sure content is handled safely
+    const safeMessage = {
+      ...newMessage,
+      content: typeof newMessage.content === 'string' ? newMessage.content.trim() : newMessage.content
+    };
+    
     setMessages(prevMessages => {
       // Check if this is an update to an existing message (for streaming)
-      if (message.id) {
-        const index = prevMessages.findIndex(m => m.id === message.id);
+      if (safeMessage.id) {
+        const index = prevMessages.findIndex(m => m.id === safeMessage.id);
         if (index !== -1) {
-          console.log('Updating existing message by ID:', message.id, 'Content length:', message.content ? message.content.length : 0);
+          console.log('Updating existing message by ID:', safeMessage.id, 'Content length:', safeMessage.content ? safeMessage.content.length : 0);
           const newMessages = [...prevMessages];
           
           // Preserve content if the new message has empty content
-          if ((!message.content || message.content.trim() === '') && newMessages[index].content) {
+          if ((!safeMessage.content || safeMessage.content.trim() === '') && newMessages[index].content) {
             console.log('New message has empty content, keeping existing content:', newMessages[index].content.length);
-            message.content = newMessages[index].content;
+            safeMessage.content = newMessages[index].content;
           }
           
           // Only update if the content is different or streaming state changed
-          if (newMessages[index].content !== message.content || 
-              newMessages[index].streaming !== message.streaming) {
+          if (newMessages[index].content !== safeMessage.content || 
+              newMessages[index].streaming !== safeMessage.streaming) {
             // Replace the entire message instead of appending content
-            newMessages[index] = message;
+            newMessages[index] = safeMessage;
             return newMessages;
           }
           return prevMessages;
@@ -91,7 +112,7 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
       }
       
       // Otherwise add as a new message
-      return [...prevMessages, message];
+      return [...prevMessages, safeMessage];
     });
   };
   
@@ -114,11 +135,20 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
     localStorage.removeItem('chatMessages');
   };
   
-  // Update this code to handle non-string content
-  const updatedMessages = messages.map(e => ({
-    ...e,
-    content: typeof e.content === 'string' ? e.content.trim() : e.content
-  }));
+  const handleApiResponse = (response: any) => {
+    // Safely extract content from the response
+    const content = response.content;
+    const safeContent = typeof content === 'string' ? content.trim() : content;
+    
+    // Use safeContent in your message
+    const assistantMessage: Message = {
+      role: 'assistant',
+      content: safeContent,
+      // other properties...
+    };
+    
+    setMessages(prevMessages => [...prevMessages, assistantMessage]);
+  };
   
   return (
     <ChatContext.Provider value={{
