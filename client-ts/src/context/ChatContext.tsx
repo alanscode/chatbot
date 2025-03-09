@@ -144,7 +144,7 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
     const assistantMessage: Message = {
       role: 'assistant',
       content: safeContent,
-      // other properties...
+      timestamp: new Date().toISOString()
     };
     
     setMessages(prevMessages => [...prevMessages, assistantMessage]);
