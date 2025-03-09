@@ -70,17 +70,19 @@ exports.handler = async (event, context) => {
       };
     }
 
-    // For non-streaming requests, use the regular API
+    // For Netlify functions, we can't do true streaming
+    // So we'll get the complete response and return it
     const response = await anthropic.messages.create({
       model: 'claude-3-5-sonnet-20240620',
       max_tokens: 4000,
       messages: cleanedMessages,
     });
 
+    // Return the complete response
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify(response),
+      body: JSON.stringify({ content: response.content[0].text }),
     };
   } catch (error) {
     console.error('Error details:', error);

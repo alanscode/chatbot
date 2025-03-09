@@ -46,7 +46,7 @@ export const streamMessage = async (
     let progressEventCount = 0;
     
     // Use different endpoint paths for Netlify vs local development
-    const endpoint = IS_NETLIFY ? '/.netlify/functions/chat/stream' : '/chat/stream';
+    const endpoint = IS_NETLIFY ? '/.netlify/functions/chat-stream' : '/chat/stream';
     console.log(`Starting stream request to ${endpoint}`);
     
     // Debug the request
@@ -67,6 +67,21 @@ export const streamMessage = async (
       throw new Error(`Stream request failed with status ${fetchResponse.status}`);
     }
     
+    // For Netlify, we get a complete response rather than a stream
+    if (IS_NETLIFY) {
+      const responseData = await fetchResponse.json();
+      const content = responseData.content || '';
+      
+      if (content && onChunk) {
+        hasReceivedAnyContent = true;
+        onChunk(content);
+      }
+      
+      console.log('Stream complete');
+      return content;
+    }
+    
+    // For local development, handle streaming response
     // Get the reader from the response body stream
     const reader = fetchResponse.body?.getReader();
     if (!reader) {

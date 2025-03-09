@@ -137,7 +137,7 @@ export const useChat = (): UseChatReturn => {
       let lastContent = '';
 
       // Stream the message
-      await streamMessage(
+      const finalContent = await streamMessage(
         formattedMessages,
         options,
         (chunk: string) => {
@@ -156,10 +156,19 @@ export const useChat = (): UseChatReturn => {
         }
       );
 
+      // Make sure we have content in the final update
+      if (!lastContent && finalContent) {
+        lastContent = finalContent;
+        addMessage({
+          ...assistantMessage,
+          content: finalContent,
+        });
+      }
+
       // Final update to mark streaming as complete
       addMessage({
         ...assistantMessage,
-        content: lastContent,
+        content: lastContent || '',
         streaming: false,
       });
 
