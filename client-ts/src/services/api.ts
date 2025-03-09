@@ -1,14 +1,16 @@
 import axios from 'axios';
 import { Message } from '../context/ChatContext';
 
-const API_URL = 'http://localhost:5000/api';
+// Use environment variable with fallback for local development
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+const IS_NETLIFY = API_URL.includes('netlify');
 
 const api = axios.create({
   baseURL: API_URL,
   headers: {
     'Content-Type': 'application/json',
   },
-  withCredentials: true
+  withCredentials: !IS_NETLIFY // Only use withCredentials for non-Netlify environments
 });
 
 interface ChatOptions {
@@ -19,7 +21,9 @@ interface ChatOptions {
 
 export const sendMessage = async (messages: Message[], options: ChatOptions = {}): Promise<Message> => {
   try {
-    const response = await api.post('/chat', { 
+    // Use different endpoint paths for Netlify vs local development
+    const endpoint = IS_NETLIFY ? '/.netlify/functions/chat' : '/chat';
+    const response = await api.post(endpoint, { 
       messages,
       options
     });
@@ -41,20 +45,22 @@ export const streamMessage = async (
     let hasReceivedAnyContent = false;
     let progressEventCount = 0;
     
-    console.log('Starting stream request to /chat/stream');
+    // Use different endpoint paths for Netlify vs local development
+    const endpoint = IS_NETLIFY ? '/.netlify/functions/chat/stream' : '/chat/stream';
+    console.log(`Starting stream request to ${endpoint}`);
     
     // Debug the request
     debugStreamRequest(messages, options);
     
     // Use fetch API directly for streaming instead of axios
     // This provides better support for streaming responses
-    const fetchResponse = await fetch(`${API_URL}/chat/stream`, {
+    const fetchResponse = await fetch(`${API_URL}${endpoint}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ messages, options }),
-      credentials: 'include'
+      credentials: IS_NETLIFY ? 'omit' : 'include'
     });
     
     if (!fetchResponse.ok) {
