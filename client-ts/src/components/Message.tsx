@@ -22,7 +22,7 @@ const Message: React.FC<MessageProps> = ({ message }) => {
       >
         {message.content ? (
           <ReactMarkdown
-            className="prose prose-sm max-w-none"
+            className={`prose prose-sm max-w-none ${isUser ? 'prose-invert text-white' : ''}`}
             components={{
               code({ node, inline, className, children, ...props }) {
                 const match = /language-(\w+)/.exec(className || '');
