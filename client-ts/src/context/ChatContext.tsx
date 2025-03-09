@@ -95,7 +95,7 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
           const newMessages = [...prevMessages];
           
           // Preserve content if the new message has empty content
-          if ((!safeMessage.content || safeMessage.content.trim() === '') && newMessages[index].content) {
+          if ((!safeMessage.content || (typeof safeMessage.content === 'string' && safeMessage.content.trim() === '')) && newMessages[index].content) {
             console.log('New message has empty content, keeping existing content:', newMessages[index].content.length);
             safeMessage.content = newMessages[index].content;
           }
