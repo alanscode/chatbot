@@ -135,21 +135,6 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
     localStorage.removeItem('chatMessages');
   };
   
-  const handleApiResponse = (response: any) => {
-    // Safely extract content from the response
-    const content = response.content;
-    const safeContent = typeof content === 'string' ? content.trim() : content;
-    
-    // Use safeContent in your message
-    const assistantMessage: Message = {
-      role: 'assistant',
-      content: safeContent,
-      timestamp: new Date().toISOString()
-    };
-    
-    setMessages(prevMessages => [...prevMessages, assistantMessage]);
-  };
-  
   return (
     <ChatContext.Provider value={{
       messages,
