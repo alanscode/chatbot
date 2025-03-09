@@ -70,7 +70,7 @@ exports.handler = async (event, context) => {
     }
 
     const response = await anthropic.messages.create({
-      model: 'claude-3-7-sonnet',
+      model: 'claude-3-7-sonnet-20240620',
       max_tokens: 4000,
       messages: cleanedMessages,
     });
