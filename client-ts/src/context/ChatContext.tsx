@@ -114,6 +114,12 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
     localStorage.removeItem('chatMessages');
   };
   
+  // Update this code to handle non-string content
+  const updatedMessages = messages.map(e => ({
+    ...e,
+    content: typeof e.content === 'string' ? e.content.trim() : e.content
+  }));
+  
   return (
     <ChatContext.Provider value={{
       messages,
