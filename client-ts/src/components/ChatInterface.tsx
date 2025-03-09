@@ -30,13 +30,17 @@ const ChatInterface: React.FC = () => {
   };
   
   return (
-    <div className="flex flex-col h-[calc(100vh-12rem)] bg-white rounded-lg shadow-sm overflow-hidden">
-      <div className="flex justify-between items-center p-4 border-b border-gray-200">
-        <h2 className="text-lg font-medium text-gray-800">Chat with Claude 3.7</h2>
+    <div className="flex flex-col h-[calc(100vh-12rem)] bg-gradient-to-br from-slate-900 to-slate-800 rounded-xl shadow-2xl overflow-hidden border border-slate-700">
+      {/* Header */}
+      <div className="flex justify-between items-center p-4 border-b border-slate-700 bg-slate-800/50 backdrop-blur-sm">
+        <div className="flex items-center space-x-3">
+          <div className="w-3 h-3 bg-purple-500 rounded-full animate-pulse"></div>
+          <h2 className="text-lg font-medium text-white">Virtual Assistant</h2>
+        </div>
         {messages.length > 0 && (
           <button
             onClick={handleClearChat}
-            className="px-3 py-1 text-sm text-red-600 hover:text-red-800 hover:bg-red-50 rounded-md transition-colors flex items-center gap-1"
+            className="px-3 py-1.5 text-sm text-slate-300 hover:text-white hover:bg-red-500/20 rounded-md transition-all duration-200 flex items-center gap-1.5 border border-slate-700 hover:border-red-500/50"
             disabled={loading}
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -46,17 +50,21 @@ const ChatInterface: React.FC = () => {
           </button>
         )}
       </div>
-      <div className="flex-1 overflow-y-auto p-4">
+      
+      {/* Messages Area */}
+      <div className="flex-1 overflow-y-auto p-6 scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-transparent">
         {messages.length === 0 ? (
-          <div className="h-full flex flex-col items-center justify-center text-gray-400">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-            </svg>
-            <p className="text-center">Start a conversation with Claude 3.7</p>
-            <p className="text-sm mt-2 text-center">Ask a question or request information</p>
+          <div className="h-full flex flex-col items-center justify-center text-slate-400">
+            <div className="w-20 h-20 mb-6 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 flex items-center justify-center shadow-lg shadow-purple-500/20">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+              </svg>
+            </div>
+            <p className="text-center text-xl font-medium text-white mb-2">Start a conversation with Claude 3.7</p>
+            <p className="text-sm text-center text-slate-400 max-w-md">Ask me anything - from creative writing and coding to complex problem-solving and research assistance.</p>
           </div>
         ) : (
-          <div className="space-y-4">
+          <div className="space-y-6">
             {messages.map((message, index) => (
               <Message key={index} message={message} />
             ))}
@@ -65,25 +73,32 @@ const ChatInterface: React.FC = () => {
         )}
       </div>
       
+      {/* Error Message */}
       {error && (
-        <div className="bg-red-50 border-l-4 border-red-500 p-4 text-red-700">
-          <p className="text-sm">Error: {error}</p>
+        <div className="bg-red-900/30 border-l-4 border-red-500 p-4 text-red-200">
+          <p className="text-sm flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+            </svg>
+            {error}
+          </p>
         </div>
       )}
       
-      <div className="border-t border-gray-200 p-4">
-        <form onSubmit={handleSubmit} className="flex space-x-2">
+      {/* Input Area */}
+      <div className="border-t border-slate-700 p-4 bg-slate-800/50 backdrop-blur-sm">
+        <form onSubmit={handleSubmit} className="flex space-x-3">
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Type your message..."
-            className="message-input"
+            className="flex-1 px-4 py-3 bg-slate-700/50 text-white placeholder-slate-400 rounded-lg border border-slate-600 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
             disabled={loading}
           />
           <button 
             type="submit" 
-            className="send-button"
+            className="p-3 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-slate-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg shadow-purple-500/20"
             disabled={loading || !input.trim()}
           >
             {loading ? (
@@ -98,6 +113,8 @@ const ChatInterface: React.FC = () => {
             )}
           </button>
         </form>
+        <div className="mt-2 text-xs text-slate-500 text-center">
+        </div>
       </div>
     </div>
   );

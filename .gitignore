@@ -32,4 +32,7 @@ Thumbs.db
 *.swo
 
 # Testing
-/coverage 
+/coverage
+
+# Logs
+server/logs/chat_logs.csv 
