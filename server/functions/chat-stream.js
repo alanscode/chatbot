@@ -45,21 +45,47 @@ exports.handler = async (event, context) => {
       };
     }
 
+    // Helper function to safely check if content is non-empty
+    const hasNonEmptyContent = (content) => {
+      if (content === undefined || content === null) return false;
+      if (typeof content === 'string') return content.trim() !== '';
+      return true; // If it's an object or array, consider it non-empty
+    };
+
     // Clean the messages to remove any fields not accepted by Anthropic
     // AND filter out messages with empty content (except possibly the last assistant message)
     const cleanedMessages = messages
       .filter((message, index) => {
         // Keep messages with non-empty content
-        if (message.content && message.content.trim() !== '') {
+        if (hasNonEmptyContent(message.content)) {
           return true;
         }
         // Allow empty content only for the last message if it's from the assistant
         return index === messages.length - 1 && message.role === 'assistant';
       })
-      .map(message => ({
-        role: message.role,
-        content: message.content || ''
-      }));
+      .map(message => {
+        // Ensure content is a string
+        let safeContent = '';
+        if (typeof message.content === 'string') {
+          safeContent = message.content;
+        } else if (message.content !== undefined && message.content !== null) {
+          // If content is an object or array, convert to string
+          try {
+            safeContent = JSON.stringify(message.content);
+          } catch (e) {
+            console.warn('Failed to stringify content:', e);
+            safeContent = String(message.content);
+          }
+        }
+        
+        return {
+          role: message.role,
+          content: safeContent
+        };
+      });
+
+    // Log the cleaned messages for debugging
+    console.log('Cleaned messages:', JSON.stringify(cleanedMessages, null, 2));
 
     // Ensure we have at least one message
     if (cleanedMessages.length === 0) {

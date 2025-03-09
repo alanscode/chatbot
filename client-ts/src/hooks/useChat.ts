@@ -49,20 +49,32 @@ export const useChat = (): UseChatReturn => {
       };
       addMessage(userMessage);
 
-      // Format messages for the API - only include messages with content
+      // Format messages for the API - ensure all messages have valid content
       const formattedMessages = messages
         .filter(msg => {
-          const isValid = msg.content !== undefined && msg.content !== null;
-          if (!isValid) {
-            console.log('Filtering out message with invalid content:', msg);
-          }
-          return isValid;
+          // Keep messages with valid content
+          return msg.content !== undefined && msg.content !== null;
         })
-        .map(msg => ({
-          role: msg.role,
-          content: msg.content,
-          timestamp: msg.timestamp
-        }));
+        .map(msg => {
+          // Ensure content is a string
+          let safeContent = '';
+          if (typeof msg.content === 'string') {
+            safeContent = msg.content;
+          } else if (msg.content !== undefined && msg.content !== null) {
+            try {
+              safeContent = JSON.stringify(msg.content);
+            } catch (e) {
+              console.warn('Failed to stringify content:', e);
+              safeContent = String(msg.content);
+            }
+          }
+          
+          return {
+            role: msg.role,
+            content: safeContent,
+            timestamp: msg.timestamp
+          };
+        });
 
       // Add the new user message
       formattedMessages.push({
@@ -70,6 +82,9 @@ export const useChat = (): UseChatReturn => {
         content,
         timestamp: new Date().toISOString()
       });
+
+      // Log the messages being sent
+      console.log('Sending messages to API:', formattedMessages);
 
       // Send the message to the API
       const response = await sendMessage(formattedMessages, options);
@@ -117,14 +132,32 @@ export const useChat = (): UseChatReturn => {
       };
       addMessage(assistantMessage);
 
-      // Format messages for the API
+      // Format messages for the API - ensure all messages have valid content
       const formattedMessages = messages
-        .filter(msg => msg.content !== undefined && msg.content !== null)
-        .map(msg => ({
-          role: msg.role,
-          content: msg.content,
-          timestamp: msg.timestamp
-        }));
+        .filter(msg => {
+          // Keep messages with valid content
+          return msg.content !== undefined && msg.content !== null;
+        })
+        .map(msg => {
+          // Ensure content is a string
+          let safeContent = '';
+          if (typeof msg.content === 'string') {
+            safeContent = msg.content;
+          } else if (msg.content !== undefined && msg.content !== null) {
+            try {
+              safeContent = JSON.stringify(msg.content);
+            } catch (e) {
+              console.warn('Failed to stringify content:', e);
+              safeContent = String(msg.content);
+            }
+          }
+          
+          return {
+            role: msg.role,
+            content: safeContent,
+            timestamp: msg.timestamp
+          };
+        });
 
       // Add the new user message
       formattedMessages.push({
@@ -132,6 +165,9 @@ export const useChat = (): UseChatReturn => {
         content,
         timestamp: new Date().toISOString()
       });
+
+      // Log the messages being sent
+      console.log('Sending messages to API:', formattedMessages);
 
       // Track the latest content to avoid duplicate updates
       let lastContent = '';
