@@ -37,11 +37,3 @@ npm start
 # or
 yarn start
 ```
-
-## Usage
-
-[Add information about how to use your chatbot]
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
