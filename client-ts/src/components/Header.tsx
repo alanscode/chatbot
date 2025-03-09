@@ -3,7 +3,7 @@ import React from 'react';
 const Header: React.FC = () => {
   return (
     <header className="bg-white shadow-sm">
-      <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+      {/* <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <div className="flex items-center">
           <h1 className="text-xl font-semibold text-gray-800">
             Claude 3.7 Chatbot
@@ -15,7 +15,7 @@ const Header: React.FC = () => {
         <div className="text-sm text-gray-500">
           Powered by Anthropic
         </div>
-      </div>
+      </div> */}
     </header>
   );
 };
