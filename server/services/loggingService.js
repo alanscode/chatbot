@@ -32,6 +32,12 @@ if (!fs.existsSync(csvFilePath)) {
  * @returns {Promise<void>}
  */
 exports.logChatInteraction = async (userQuestion, assistantAnswer) => {
+  // Skip logging in production environment
+  if (process.env.NODE_ENV === 'production') {
+    console.log('Chat logging disabled in production environment');
+    return;
+  }
+  
   try {
     const record = {
       timestamp: new Date().toISOString(),
