@@ -15,10 +15,15 @@ const Message: React.FC<MessageProps> = ({ message }) => {
     <div className={`flex ${isUser ? 'justify-end' : 'justify-start'} group`}>
       {/* Avatar for assistant */}
       {!isUser && (
-        <div className="w-8 h-8 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 flex items-center justify-center mr-3 shadow-md shadow-purple-500/10">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
-            <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-            <path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd" />
+        <div className="w-10 h-10 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 flex items-center justify-center mr-3 shadow-md shadow-purple-500/10">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <rect x="8" y="2" width="8" height="4" rx="1" />
+            <rect x="3" y="10" width="18" height="12" rx="2" />
+            <circle cx="8.5" cy="16" r="1.5" />
+            <circle cx="15.5" cy="16" r="1.5" />
+            <path d="M12 7v3" />
+            <line x1="8" y1="22" x2="8" y2="22.5" />
+            <line x1="16" y1="22" x2="16" y2="22.5" />
           </svg>
         </div>
       )}
@@ -77,8 +82,8 @@ const Message: React.FC<MessageProps> = ({ message }) => {
       
       {/* Avatar for user */}
       {isUser && (
-        <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center ml-3 shadow-md shadow-blue-500/10">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
+        <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center ml-3 shadow-md shadow-blue-500/10">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" viewBox="0 0 20 20" fill="currentColor">
             <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
           </svg>
         </div>
