@@ -17,10 +17,10 @@ const Header: React.FC = () => {
             </svg>
           </div>
           <h1 className="text-xl font-semibold text-white">
-           Alans Bot
+           Alan Nguyen - Virtual Persona
           </h1>
           <span className="ml-3 px-2 py-0.5 bg-purple-500/20 text-purple-300 text-xs font-medium rounded-full border border-purple-500/30">
-            v0.0.0.1
+            AI First Developer
           </span>
         </div>
         <div className="text-sm text-slate-400">

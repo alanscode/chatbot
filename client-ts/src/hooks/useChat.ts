@@ -6,6 +6,7 @@ interface UseChatReturn {
   messages: Message[];
   sendMessageToAssistant: (content: string, options?: any) => Promise<void>;
   streamMessageToAssistant: (content: string, options?: any) => Promise<void>;
+  addGreetingMessage: (content: string) => void;
   clearMessages: () => void;
   loading: boolean;
   error: string | null;
@@ -31,6 +32,17 @@ export const useChat = (): UseChatReturn => {
       }
     };
   }, [typingTimer]);
+
+  // Add a greeting message directly without requiring a user message
+  const addGreetingMessage = useCallback((content: string) => {
+    const greetingMessage: Message = {
+      role: 'assistant',
+      content,
+      timestamp: new Date().toISOString(),
+      id: `greeting-${Date.now()}`
+    };
+    addMessage(greetingMessage);
+  }, [addMessage]);
 
   const sendMessageToAssistant = useCallback(async (content: string, options = {}) => {
     try {
@@ -220,6 +232,7 @@ export const useChat = (): UseChatReturn => {
     messages,
     sendMessageToAssistant,
     streamMessageToAssistant,
+    addGreetingMessage,
     clearMessages,
     loading,
     error

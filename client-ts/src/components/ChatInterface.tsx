@@ -4,13 +4,20 @@ import { useChat } from '../hooks/useChat';
 
 const ChatInterface: React.FC = () => {
   const [input, setInput] = useState<string>('');
-  const { messages, streamMessageToAssistant, clearMessages, loading, error } = useChat();
+  const { messages, streamMessageToAssistant, addGreetingMessage, clearMessages, loading, error } = useChat();
   const messagesEndRef = useRef<HTMLDivElement>(null);
   
   // Auto-scroll to bottom when messages change
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
+  
+  // Display greeting message when component mounts if no messages exist
+  useEffect(() => {
+    if (messages.length === 0) {
+      addGreetingMessage("Hello! Welcome to the chatbot. How can I help you today?");
+    }
+  }, [messages, addGreetingMessage]);
   
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,7 +42,7 @@ const ChatInterface: React.FC = () => {
       <div className="flex justify-between items-center p-4 border-b border-slate-700 bg-slate-800/50 backdrop-blur-sm">
         <div className="flex items-center space-x-3">
           <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-          <h2 className="text-lg font-medium text-white">Virtual Assistant</h2>
+          <h2 className="text-lg font-medium text-white">Online</h2>
         </div>
         {messages.length > 0 && (
           <button
@@ -53,24 +60,14 @@ const ChatInterface: React.FC = () => {
       
       {/* Messages Area */}
       <div className="flex-1 overflow-y-auto p-6 scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-transparent">
-        {messages.length === 0 ? (
-          <div className="h-full flex flex-col items-center justify-center text-slate-400">
-            <div className="w-20 h-20 mb-6 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 flex items-center justify-center shadow-lg shadow-purple-500/20">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-              </svg>
-            </div>
-            <p className="text-center text-xl font-medium text-white mb-2">Start a conversation with Claude 3.7</p>
-            <p className="text-sm text-center text-slate-400 max-w-md">Ask me anything - from creative writing and coding to complex problem-solving and research assistance.</p>
-          </div>
-        ) : (
+
           <div className="space-y-6">
             {messages.map((message, index) => (
               <Message key={index} message={message} />
             ))}
             <div ref={messagesEndRef} />
           </div>
-        )}
+        
       </div>
       
       {/* Error Message */}
