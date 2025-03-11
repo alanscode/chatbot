@@ -8,6 +8,21 @@
   included_files = ["data/**"]
 
 [[redirects]]
+  from = "/api/chat/*"
+  to = "/.netlify/functions/chat:splat"
+  status = 200
+
+[[redirects]]
+  from = "/api/resume/save"
+  to = "/.netlify/functions/resume-save"
+  status = 200
+
+[[redirects]]
+  from = "/api/resume"
+  to = "/.netlify/functions/resume"
+  status = 200
+
+[[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/:splat"
   status = 200
