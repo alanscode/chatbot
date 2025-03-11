@@ -216,22 +216,18 @@ exports.handler = async (event, context) => {
 
     // Add system prompt and resume content to the messages
     const messagesWithSystemPrompt = [
-      {
-        role: 'system',
-        content: systemPrompt
-      },
-      {
-        role: 'system',
-        content: '-- RESUME START --\n' + resumeContent
-      },
       ...cleanedMessages
     ];
+
+    // Combine system prompt and resume content for the top-level system parameter
+    const systemContent = systemPrompt + '\n\n-- RESUME START --\n' + resumeContent;
 
     // For non-streaming requests, use the regular API
     const response = await anthropic.messages.create({
       model: 'claude-3-5-sonnet-20240620',
       max_tokens: 4000,
       messages: messagesWithSystemPrompt,
+      system: systemContent,
     });
 
     return {
