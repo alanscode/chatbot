@@ -3,12 +3,12 @@ const path = require('path');
 const fsSync = require('fs');
 
 exports.handler = async (event, context) => {
-  // Get the origin from the request headers
-  const origin = event.headers.origin || event.headers.Origin || '*';
+  // Always allow the specific origin
+  const allowedOrigin = 'https://alans-resume.netlify.app';
   
-  // Set CORS headers to allow requests from the specific origin
+  // Set CORS headers explicitly for the allowed origin
   const headers = {
-    'Access-Control-Allow-Origin': origin,
+    'Access-Control-Allow-Origin': allowedOrigin,
     'Access-Control-Allow-Headers': 'Content-Type, Authorization',
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
     'Access-Control-Allow-Credentials': 'true',
@@ -17,6 +17,7 @@ exports.handler = async (event, context) => {
 
   // Handle preflight OPTIONS request
   if (event.httpMethod === 'OPTIONS') {
+    console.log('Handling OPTIONS preflight request');
     return {
       statusCode: 204,
       headers,
