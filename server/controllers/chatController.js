@@ -5,15 +5,15 @@ const fs = require('fs');
 const path = require('path');
 
 // Function to load resume content
-const loadResumeContent = () => {
-  try {
-    const resumePath = path.join(__dirname, '../data/alan_nguyen_resume.md');
-    return fs.readFileSync(resumePath, 'utf8');
-  } catch (error) {
-    console.error('Error loading resume file:', error);
-    return 'Resume information unavailable';
-  }
-};
+// const loadResumeContent = () => {
+//   try {
+//     const resumePath = path.join(__dirname, '../data/alan_nguyen_resume.md');
+//     return fs.readFileSync(resumePath, 'utf8');
+//   } catch (error) {
+//     console.error('Error loading resume file:', error);
+//     return 'Resume information unavailable';
+//   }
+// };
 
 // Regular message endpoint
 exports.sendMessage = async (req, res) => {
@@ -60,11 +60,17 @@ exports.streamMessage = async (req, res) => {
       return res.status(400).json({ error: 'Invalid messages format' });
     }
 
-    // Add resume information to all messages
-    messages.unshift({
-      role: 'system',
-      content: loadResumeContent()
-    });
+    // Add both system prompt and resume content
+    messages.unshift(
+      {
+        role: 'system',
+        content: 'You are a funny, and accurate assistant that can answer questions about the Alan Nguyen\'s resume. If asked about questions that are not related to Alan Nguyen\'s resume, you can politely decline to answer but do it in a funny way and try to refocus the conversation back to Alan Nguyen\'s resume. Always assume the use of "him", "he", "his", "them", "alan" or other pronouns is referring to Alan Nguyen. It is SUPER IMPORTANT that you only provide accurate answers based on the Alan Nguyen\'s resume information and should not add any extra information, or make up information that is not true. When asked about a technology or tool that is not listed in the resume, you can let them know that Alan Nguyen enjoys learning and developing new skills. You free to use emojis in your responses. Never suggest linkedin profile exists for Alan Nguyen.'
+      },
+      {
+        role: 'system',
+        content: fs.readFileSync(path.join(__dirname, '../data/alan_nguyen_resume.md'), 'utf8')
+      }
+    );
 
     // Extract the last user message as the question
     const userQuestion = messages.filter(msg => msg.role === 'user').pop()?.content || '';
