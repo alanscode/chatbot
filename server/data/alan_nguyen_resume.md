@@ -32,8 +32,8 @@ Combines technical mastery with strategic problem-solving to build maintainable 
 ## PROFESSIONAL EXPERIENCE
 
 ### KFC.com / Yum! Brands via Cognizant
-**Senior UI Developer** | *Janurary 2024 - April 2025*
-- Engineered high-performance UI components using React, TypeScript and SCSS for KFC's online menu, ordering, checkout, and payment systems
+**Senior UI Developer** | *January 2024 - April 2025*
+- Engineered high-performance UI components using React, TypeScript, and SCSS for KFC's online menu, ordering, checkout, and payment systems
 - Optimized GraphQL client implementations that improved data fetching efficiency and enhanced user experience
 - Architected responsive interfaces serving millions of daily customers across diverse device types
 - Resolved critical customer-facing issues through bug tracking and systematic resolution in Jira
