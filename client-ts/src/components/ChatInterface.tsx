@@ -15,7 +15,7 @@ const ChatInterface: React.FC = () => {
   // Display greeting message when component mounts if no messages exist
   useEffect(() => {
     if (messages.length === 0) {
-      addGreetingMessage("Hello! Welcome to the chatbot. How can I help you today?");
+      addGreetingMessage("Hello there! 👋 I'm your friendly neighborhood resume-bot, here to spill all the beans about my creator's work history, coding wizardry, and professional adventures. Ask me anything about their experience, tech skills, or career journey—I promise to be more entertaining than reading a LinkedIn profile! How can I help showcase their talents today?");
     }
   }, [messages, addGreetingMessage]);
   
