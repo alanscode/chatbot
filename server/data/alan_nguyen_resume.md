@@ -88,3 +88,17 @@ Senior Full Stack Developer with 13+ years of experience architecting and implem
 ## Education
 - Bachelor of Arts in Business Administration, Concentration in Operations Management
 - California Polytechnic State University Pomona California
+
+## Hobbies and Interests
+- PC Hardware, Spirituality, Cooking, Traveling, Hiking, Camping, Fishing, Reading, Writing, and Learning New Technologies
+
+## What kind of company would I like to work for?
+- A company that is pro remote work
+- A company that values their employees and provides a positive work environment
+- A company that is mission-driven and makes a positive impact in the world
+- A company that is willing to invest in their employees and provide them with the resources to grow and succeed
+- A company that is willing to embrace change and adapt to new technologies
+- A company that is willing to give their employees the freedom to innovate and experiment
+- A company that is willing to give their employees the resources to learn and grow
+- A company that is willing to give their employees the resources to be creative and think outside the box
+
