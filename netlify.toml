@@ -5,27 +5,44 @@
 
 [functions]
   directory = "functions"
-  included_files = ["data/**"]
+  included_files = ["data/**", "../data/**"]
+
+[[headers]]
+  for = "/*"
+    [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Headers = "Content-Type, Authorization"
+    Access-Control-Allow-Methods = "GET, POST, OPTIONS"
+    Access-Control-Allow-Credentials = "true"
+    Access-Control-Max-Age = "86400"
 
 [[redirects]]
   from = "/api/chat/*"
   to = "/.netlify/functions/chat:splat"
   status = 200
+  force = true
+  headers = {Access-Control-Allow-Origin = "*"}
 
 [[redirects]]
   from = "/api/resume/save"
   to = "/.netlify/functions/resume-save"
   status = 200
+  force = true
+  headers = {Access-Control-Allow-Origin = "*"}
 
 [[redirects]]
   from = "/api/resume"
   to = "/.netlify/functions/resume"
   status = 200
+  force = true
+  headers = {Access-Control-Allow-Origin = "*"}
 
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/:splat"
   status = 200
+  force = true
+  headers = {Access-Control-Allow-Origin = "*"}
 
 [build.environment]
   NODE_VERSION = "18" 
