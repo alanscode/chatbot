@@ -37,7 +37,7 @@ const ChatInterface: React.FC = () => {
   };
   
   return (
-    <div className="flex flex-col h-[calc(100vh-12rem)] bg-gradient-to-br from-slate-900 to-slate-800 rounded-xl shadow-2xl overflow-hidden border border-slate-700">
+    <div className="flex flex-col h-[calc(70vh-12rem)] bg-gradient-to-br from-slate-900 to-slate-800 rounded-xl shadow-2xl overflow-hidden border border-slate-700">
       {/* Header */}
       <div className="flex justify-between items-center p-4 border-b border-slate-700 bg-slate-800/50 backdrop-blur-sm">
         <div className="flex items-center space-x-3">
@@ -60,14 +60,12 @@ const ChatInterface: React.FC = () => {
       
       {/* Messages Area */}
       <div className="flex-1 overflow-y-auto p-6 scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-transparent">
-
           <div className="space-y-6">
             {messages.map((message, index) => (
               <Message key={index} message={message} />
             ))}
             <div ref={messagesEndRef} />
           </div>
-        
       </div>
       
       {/* Error Message */}

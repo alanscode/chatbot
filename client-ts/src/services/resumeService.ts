@@ -1,6 +1,9 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:5000';
+// Determine the API base URL based on environment
+const API_BASE_URL = process.env.NODE_ENV === 'production' 
+  ? process.env.REACT_APP_API_URL 
+  : 'http://localhost:5000';
 
 export const fetchResumeContent = async (): Promise<string> => {
   try {
