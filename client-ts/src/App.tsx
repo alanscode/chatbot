@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route  } from 'react-router-dom';
 import ChatInterface from './components/ChatInterface';
 import Header from './components/Header';
-import './styles/markdown-editor.css';
 
 const App: React.FC = () => {
   return (
