@@ -4,17 +4,11 @@ const loggingService = require('../services/loggingService');
 const fs = require('fs');
 const path = require('path');
 
-// Cache for resume content
-let resumeCache = null;
-
 // Function to load resume content
 const loadResumeContent = () => {
-  if (resumeCache) return resumeCache;
-  
   try {
     const resumePath = path.join(__dirname, '../data/alan_nguyen_resume.md');
-    resumeCache = fs.readFileSync(resumePath, 'utf8');
-    return resumeCache;
+    return fs.readFileSync(resumePath, 'utf8');
   } catch (error) {
     console.error('Error loading resume file:', error);
     return 'Resume information unavailable';
