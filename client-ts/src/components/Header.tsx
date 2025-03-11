@@ -20,7 +20,7 @@ const Header: React.FC = () => {
            Alan Nguyen
           </h1>
           <span className="ml-3 px-2 py-0.5 bg-purple-500/20 text-purple-300 text-xs font-medium rounded-full border border-purple-500/30">
-            AI First Developer
+            Senior Full Stack Developer
           </span>
         </div>
         <div className="text-sm text-slate-400">
