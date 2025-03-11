@@ -1,12 +1,18 @@
 const fs = require('fs').promises;
 const path = require('path');
+const fsSync = require('fs');
 
 exports.handler = async (event, context) => {
-  // Set CORS headers to allow requests from any origin
+  // Get the origin from the request headers
+  const origin = event.headers.origin || event.headers.Origin || '*';
+  
+  // Set CORS headers to allow requests from the specific origin
   const headers = {
-    'Access-Control-Allow-Origin': '*', // Allow all origins
-    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Origin': origin,
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+    'Access-Control-Allow-Credentials': 'true',
+    'Access-Control-Max-Age': '86400'
   };
 
   // Handle preflight OPTIONS request
