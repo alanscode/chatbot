@@ -111,5 +111,3 @@ Senior Full Stack Developer with 13+ years of experience architecting and implem
 - Innovation Lead
 - AI Automation Developer
 - AI First Developer
-
-

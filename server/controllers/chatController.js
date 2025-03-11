@@ -1,26 +1,6 @@
-const Anthropic = require('@anthropic-ai/sdk');
 const anthropicService = require('../services/anthropicService');
 const loggingService = require('../services/loggingService');
-const fs = require('fs');
-const path = require('path');
-
-// Resume file path
-const RESUME_PATH = path.join(__dirname, '../data/alan_nguyen_resume.md');
-
-// Helper function to extract system prompt and resume content from the markdown file
-const extractPromptAndResume = () => {
-  const fileContent = fs.readFileSync(RESUME_PATH, 'utf8');
-  
-  // Extract system prompt (content between ## SYSTEM_PROMPT and ## RESUME_CONTENT_START)
-  const systemPromptMatch = fileContent.match(/## SYSTEM_PROMPT\s+([\s\S]*?)## RESUME_CONTENT_START/);
-  const systemPrompt = systemPromptMatch ? systemPromptMatch[1].trim() : '';
-  
-  // Extract resume content (everything after ## RESUME_CONTENT_START)
-  const resumeContentMatch = fileContent.match(/## RESUME_CONTENT_START\s+([\s\S]*)/);
-  const resumeContent = resumeContentMatch ? resumeContentMatch[1].trim() : fileContent;
-  
-  return { systemPrompt, resumeContent };
-};
+const { loadResumeData, cleanMessages } = require('../utils/chat-utils');
 
 // Helper function to prepare messages with system prompts
 const prepareMessages = (messages) => {
@@ -28,8 +8,8 @@ const prepareMessages = (messages) => {
     throw new Error('Invalid messages format');
   }
   
-  // Extract system prompt and resume content
-  const { systemPrompt, resumeContent } = extractPromptAndResume();
+  // Use loadResumeData utility instead of duplicating the logic
+  const { systemPrompt, resumeContent } = loadResumeData();
   
   // Add both system prompt and resume content
   messages.unshift(
@@ -67,10 +47,18 @@ const handleError = (res, error, errorMessage = 'Failed to process message') => 
 const validateAndPrepareRequest = (req, res) => {
   const { messages, options } = req.body;
   
+  // Use cleanMessages utility instead of custom validation
+  const { valid, error, cleanedMessages } = cleanMessages(messages);
+  
+  if (!valid) {
+    res.status(400).json({ error });
+    return { isValid: false };
+  }
+  
   try {
-    prepareMessages(messages);
+    const preparedMessages = prepareMessages(cleanedMessages);
     const userQuestion = extractUserQuestion(messages);
-    return { messages, options, userQuestion, isValid: true };
+    return { messages: preparedMessages, options, userQuestion, isValid: true };
   } catch (error) {
     res.status(400).json({ error: error.message });
     return { isValid: false };

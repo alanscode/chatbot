@@ -1,0 +1,84 @@
+/* Override default markdown editor styles */
+.w-md-editor {
+  background-color: transparent !important;
+  border: 1px solid rgb(51, 65, 85) !important;
+  border-radius: 0.5rem !important;
+}
+
+.w-md-editor-toolbar {
+  background-color: rgba(30, 41, 59, 0.5) !important;
+  border-bottom: 1px solid rgb(51, 65, 85) !important;
+}
+
+.w-md-editor-toolbar ul li button {
+  color: rgb(148, 163, 184) !important;
+}
+
+.w-md-editor-toolbar ul li button:hover {
+  color: white !important;
+  background-color: rgba(99, 102, 241, 0.1) !important;
+}
+
+.w-md-editor-text {
+  background-color: transparent !important;
+}
+
+.w-md-editor-text-pre > code,
+.w-md-editor-text-input {
+  color: rgb(226, 232, 240) !important;
+  font-size: 0.95rem !important;
+  line-height: 1.6 !important;
+}
+
+.w-md-editor-preview {
+  background-color: rgba(30, 41, 59, 0.3) !important;
+  box-shadow: inset 1px 0 0 0 rgb(51, 65, 85) !important;
+}
+
+/* Markdown preview styles */
+.wmde-markdown {
+  background-color: transparent !important;
+  color: rgb(226, 232, 240) !important;
+}
+
+.wmde-markdown h1,
+.wmde-markdown h2,
+.wmde-markdown h3,
+.wmde-markdown h4,
+.wmde-markdown h5,
+.wmde-markdown h6 {
+  color: white !important;
+  border-bottom: 1px solid rgb(51, 65, 85) !important;
+}
+
+.wmde-markdown code {
+  background-color: rgba(30, 41, 59, 0.5) !important;
+  color: rgb(226, 232, 240) !important;
+}
+
+.wmde-markdown pre {
+  background-color: rgba(30, 41, 59, 0.5) !important;
+  border: 1px solid rgb(51, 65, 85) !important;
+}
+
+.wmde-markdown blockquote {
+  color: rgb(148, 163, 184) !important;
+  border-left-color: rgb(99, 102, 241) !important;
+}
+
+.wmde-markdown hr {
+  border-color: rgb(51, 65, 85) !important;
+}
+
+.wmde-markdown a {
+  color: rgb(99, 102, 241) !important;
+}
+
+.wmde-markdown table {
+  border-color: rgb(51, 65, 85) !important;
+}
+
+.wmde-markdown th,
+.wmde-markdown td {
+  border-color: rgb(51, 65, 85) !important;
+} 
