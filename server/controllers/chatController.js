@@ -24,11 +24,17 @@ exports.sendMessage = async (req, res) => {
       return res.status(400).json({ error: 'Invalid messages format' });
     }
     
-    // Add resume information to all messages
-    messages.unshift({
-      role: 'system',
-      content: loadResumeContent()
-    });
+    // Add both system prompt and resume content
+    messages.unshift(
+      {
+        role: 'system',
+        content: 'You are an AI assistant focused solely on providing information from Alan Nguyen\'s resume. Follow these strict rules:\n\n1. ONLY provide information that is explicitly stated in the resume\n2. If information is not in the resume, say "I don\'t see that information in Alan\'s resume" - do not make assumptions\n3. For dates, skills, and job details, quote exactly what\'s in the resume\n4. For questions about skills/technologies not listed, say "That technology is not listed in Alan\'s resume"\n5. If asked about personal details beyond professional information, decline to answer\n6. You may be funny in your responses, but never at the expense of accuracy\n7. Always ground your responses in specific sections of the resume\n\nIf asked about non-resume topics, politely redirect the conversation back to Alan\'s professional experience and skills as documented in the resume.'
+      },
+      {
+        role: 'system',
+        content: '-- RESUME START --\n' + fs.readFileSync(path.join(__dirname, '../data/alan_nguyen_resume.md'), 'utf8')
+      }
+    );
     
     const response = await anthropicService.sendMessage(messages, options);
     

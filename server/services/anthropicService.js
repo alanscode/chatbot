@@ -25,7 +25,7 @@ exports.sendMessage = async (messages, options = {}) => {
     }
     
     const formattedMessages = validMessages.map(msg => ({
-      role: msg.role === 'user' ? 'user' : 'assistant',
+      role: msg.role === 'user' ? 'user' : msg.role === 'system' ? 'system' : 'assistant',
       content: msg.content
     }));
 
@@ -65,7 +65,7 @@ exports.streamMessage = async (messages, options = {}, onChunk) => {
     }
     
     const formattedMessages = validMessages.map(msg => ({
-      role: msg.role === 'user' ? 'user' : 'assistant',
+      role: msg.role === 'user' ? 'user' : msg.role === 'system' ? 'system' : 'assistant',
       content: msg.content
     }));
 
