@@ -4,7 +4,7 @@ import { useChat } from '../hooks/useChat';
 
 const ChatInterface: React.FC = () => {
   const [input, setInput] = useState<string>('');
-  const { messages, streamMessageToAssistant, addGreetingMessage, clearMessages, loading, error } = useChat();
+  const { messages, streamMessageToAssistant, addGreetingMessage, loading, error } = useChat();
   const messagesEndRef = useRef<HTMLDivElement>(null);
   
   // Auto-scroll to bottom when messages change
