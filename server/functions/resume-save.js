@@ -1,5 +1,6 @@
 const fs = require('fs').promises;
 const path = require('path');
+const fsSync = require('fs');
 
 exports.handler = async (event, context) => {
   // Set CORS headers to allow requests from any origin
@@ -26,7 +27,8 @@ exports.handler = async (event, context) => {
     };
   }
 
-  const resumePath = path.join(__dirname, '../data/alan_nguyen_resume.md');
+  const dataDir = path.join(__dirname, '../data');
+  const resumePath = path.join(dataDir, 'alan_nguyen_resume.md');
 
   try {
     const requestBody = JSON.parse(event.body);
@@ -43,7 +45,20 @@ exports.handler = async (event, context) => {
       };
     }
 
+    console.log('Data directory:', dataDir);
+    console.log('Resume path:', resumePath);
+    
+    // Ensure data directory exists
+    if (!fsSync.existsSync(dataDir)) {
+      console.log('Data directory does not exist, creating it...');
+      await fs.mkdir(dataDir, { recursive: true });
+      console.log('Data directory created');
+    }
+    
+    console.log('Attempting to write file...');
     await fs.writeFile(resumePath, content, 'utf8');
+    console.log('File written successfully');
+    
     return {
       statusCode: 200,
       headers,
@@ -51,12 +66,20 @@ exports.handler = async (event, context) => {
     };
   } catch (error) {
     console.error('Error saving resume:', error);
+    console.error('Error details:', JSON.stringify({
+      name: error.name,
+      message: error.message,
+      code: error.code,
+      stack: error.stack
+    }));
+    
     return {
       statusCode: 500,
       headers,
       body: JSON.stringify({
         error: 'Server error',
-        message: 'An unexpected error occurred'
+        message: error.message || 'An unexpected error occurred',
+        code: error.code
       })
     };
   }
