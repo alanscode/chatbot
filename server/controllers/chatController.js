@@ -1,6 +1,25 @@
 const Anthropic = require('@anthropic-ai/sdk');
 const anthropicService = require('../services/anthropicService');
 const loggingService = require('../services/loggingService');
+const fs = require('fs');
+const path = require('path');
+
+// Cache for resume content
+let resumeCache = null;
+
+// Function to load resume content
+const loadResumeContent = () => {
+  if (resumeCache) return resumeCache;
+  
+  try {
+    const resumePath = path.join(__dirname, '../data/alan_nguyen_resume.md');
+    resumeCache = fs.readFileSync(resumePath, 'utf8');
+    return resumeCache;
+  } catch (error) {
+    console.error('Error loading resume file:', error);
+    return 'Resume information unavailable';
+  }
+};
 
 // Regular message endpoint
 exports.sendMessage = async (req, res) => {
@@ -10,6 +29,12 @@ exports.sendMessage = async (req, res) => {
     if (!messages || !Array.isArray(messages) || messages.length === 0) {
       return res.status(400).json({ error: 'Invalid messages format' });
     }
+    
+    // Add resume information to all messages
+    messages.unshift({
+      role: 'system',
+      content: 'Here is the user\'s resume information: ' + loadResumeContent()
+    });
     
     const response = await anthropicService.sendMessage(messages, options);
     
@@ -40,6 +65,12 @@ exports.streamMessage = async (req, res) => {
     if (!messages || !Array.isArray(messages) || messages.length === 0) {
       return res.status(400).json({ error: 'Invalid messages format' });
     }
+
+    // Add resume information to all messages
+    messages.unshift({
+      role: 'system',
+      content: 'Here is the user\'s resume information: ' + loadResumeContent()
+    });
 
     // Extract the last user message as the question
     const userQuestion = messages.filter(msg => msg.role === 'user').pop()?.content || '';
