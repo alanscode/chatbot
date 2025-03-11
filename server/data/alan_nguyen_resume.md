@@ -42,7 +42,12 @@ Combines technical mastery with strategic problem-solving to build maintainable 
 
 ### Discover Financial Services via Cognizant
 **Senior UI Developer** | *March 2022 - April 2025*
-
+- Engineered reusable React components leveraging TypeScript and Material UI, enhancing development efficiency across multiple projects
+- Maintained comprehensive unit test suites with Jest and React Testing Library, achieving 90% code coverage
+- Implemented rigorous accessibility testing protocols, ensuring WCAG 2.1 compliance for all user interfaces
+- Documented component APIs and usage patterns in Storybook, accelerating onboarding and cross-team adoption
+- Collaborated with DevOps to optimize Trident CI/CD pipeline, reducing build times by 30%
+- Executed systematic bug triage and resolution processes in Jira, maintaining high product quality standards
 
 ### Med Legal
 **Senior Software Developer** | *October 2018 - February 2021*
