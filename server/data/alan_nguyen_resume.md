@@ -71,4 +71,6 @@ Experienced full stack web developer specializing in .NET, C#, Angular, React, T
 - **E2E Testing:** Cypress
 - **DevOps:** Gitlab CI/CD
 - **Other:** Chrome Browser Extensions, Single Page Applications 
+- **Tools:** AI First Development, Cursor, MCP
+- **AI Automation:** n8n, Zapier, OpenAI API, Anthropic API
 -- End of Resume Information ---
