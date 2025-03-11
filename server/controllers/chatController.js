@@ -68,7 +68,7 @@ exports.streamMessage = async (req, res) => {
       },
       {
         role: 'system',
-        content: fs.readFileSync(path.join(__dirname, '../data/alan_nguyen_resume.md'), 'utf8')
+        content: '-- RESUME START --\n' + fs.readFileSync(path.join(__dirname, '../data/alan_nguyen_resume.md'), 'utf8')
       }
     );
 

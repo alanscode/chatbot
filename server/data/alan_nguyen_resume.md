@@ -1,8 +1,3 @@
--- SYSTEM PROMPT START --
-
--- SYSTEM PROMPT END --
-
--- RESUME START --
 ## Name: Alan Nguyen
 
 ## Contact Information
@@ -78,5 +73,3 @@ Experienced full stack web developer specializing in .NET, C#, Angular, React, T
 ## Education
 - Bachelor of Arts in Business Administration, Concentration in Operations Management
 - California Polytechnic State University Pomona California
-
--- RESUME END --
