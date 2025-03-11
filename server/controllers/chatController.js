@@ -63,7 +63,7 @@ exports.streamMessage = async (req, res) => {
     // Add resume information to all messages
     messages.unshift({
       role: 'system',
-      content: 'Here is the user\'s resume information: ' + loadResumeContent()
+      content: loadResumeContent()
     });
 
     // Extract the last user message as the question
