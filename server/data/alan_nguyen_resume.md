@@ -77,7 +77,7 @@ Combines technical mastery with strategic problem-solving to build maintainable 
 
 ### The Phelps Agency
 **Web Developer** | *September 2009 - March 2011*
-- Led Public Storage website revamp, revolutionizing property search, home page, and account interfaces
+- Led publicstorage.com revamp, revolutionizing property search, home page, and account interfaces
 - Developed custom Panasonic Toughbook PC configuration tool that streamlined the purchase process
 - Optimized existing ASP.NET websites, improving performance and user experience
 
@@ -86,7 +86,7 @@ Combines technical mastery with strategic problem-solving to build maintainable 
 - **Frontend:** Next.js, React, Angular, ASP.NET, jQuery, Material UI, Tailwind, Responsive CSS
 - **Backend:** .NET, Node.js, Express API
 - **Database:** SQL Server, Entity Framework, LINQ, PostgreSQL, MySQL, MongoDB
-- **DevOps:** Git, Team Foundation Server, GitLab CI/CD, Serverless Functions
+- **DevOps:** CI/CD Systems, Serverless Functions
 - **AI Integration:** OpenAI API, Anthropic API, Cursor, MCP, n8n, Make, Zapier
 - **Specialties:** Chrome Extensions, Single Page Applications, Modern Development Workflows
 
