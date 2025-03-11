@@ -7,7 +7,6 @@ const rateLimit = require('express-rate-limit');
 
 // Import routes
 const chatRoutes = require('./routes/chat');
-const resumeRoutes = require('./routes/resume');
 
 // Create Express app
 const app = express();
@@ -34,7 +33,6 @@ app.use(limiter);
 
 // Routes
 app.use('/api/chat', chatRoutes);
-app.use('/api/resume', resumeRoutes);
 
 // Health check endpoint
 app.get('/health', (req, res) => {
