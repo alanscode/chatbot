@@ -32,7 +32,7 @@ Combines technical mastery with strategic problem-solving to build maintainable 
 ## PROFESSIONAL EXPERIENCE
 
 ### KFC.com / Yum! Brands via Cognizant
-**Senior UI Developer** | *March 2022 - April 2025*
+**Senior UI Developer** | *Janurary 2024 - April 2025*
 - Engineered high-performance UI components using React, TypeScript and SCSS for KFC's online menu, ordering, checkout, and payment systems
 - Optimized GraphQL client implementations that improved data fetching efficiency and enhanced user experience
 - Architected responsive interfaces serving millions of daily customers across diverse device types
@@ -41,7 +41,7 @@ Combines technical mastery with strategic problem-solving to build maintainable 
 - Implemented performance optimizations that reduced page load times by 40%, directly increasing conversion rates
 
 ### Discover Financial Services via Cognizant
-**Senior UI Developer** | *March 2022 - April 2025*
+**Senior UI Developer** | *March 2022 - December 2024*
 - Engineered reusable React components leveraging TypeScript and Material UI, enhancing development efficiency across multiple projects
 - Maintained comprehensive unit test suites with Jest and React Testing Library, achieving 90% code coverage
 - Implemented rigorous accessibility testing protocols, ensuring WCAG 2.1 compliance for all user interfaces
