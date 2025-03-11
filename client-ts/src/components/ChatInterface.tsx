@@ -30,11 +30,11 @@ const ChatInterface: React.FC = () => {
     await streamMessageToAssistant(userInput);
   };
   
-  const handleClearChat = () => {
-    if (window.confirm('Are you sure you want to clear the chat history? This action cannot be undone.')) {
-      clearMessages();
-    }
-  };
+  // const handleClearChat = () => {
+  //   if (window.confirm('Are you sure you want to clear the chat history? This action cannot be undone.')) {
+  //     clearMessages();
+  //   }
+  // };
   
   return (
     <div className="flex flex-col h-[calc(100vh-12rem)] bg-gradient-to-br from-slate-900 to-slate-800 rounded-xl shadow-2xl overflow-hidden border border-slate-700">
@@ -44,7 +44,7 @@ const ChatInterface: React.FC = () => {
           <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
           <h2 className="text-lg font-medium text-white">Online</h2>
         </div>
-        {messages.length > 0 && (
+        {/* {messages.length > 0 && (
           <button
             onClick={handleClearChat}
             className="px-3 py-1.5 text-sm text-slate-300 hover:text-white hover:bg-red-500/20 rounded-md transition-all duration-200 flex items-center gap-1.5 border border-slate-700 hover:border-red-500/50"
@@ -55,7 +55,7 @@ const ChatInterface: React.FC = () => {
             </svg>
             Clear Chat
           </button>
-        )}
+        )} */}
       </div>
       
       {/* Messages Area */}
