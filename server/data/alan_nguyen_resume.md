@@ -9,7 +9,7 @@ Experienced full stack web developer specializing in .NET, C#, Angular, React, T
 
 ## Professional Experience
 
-### Cognizant
+### Employer: Cognizant
 **Senior UI Developer** | *March 2022 - April 2025*
 - Build complex user interfaces with ReactJS, Redux, and Material UI
 - Write custom form validations, secure defensive JavaScript, and complex application logic
@@ -19,7 +19,7 @@ Experienced full stack web developer specializing in .NET, C#, Angular, React, T
 - Conduct manual testing and write component unit tests with Jest test runner
 - Contribute to user interface and user experience design decisions
 
-### Med Legal
+### Employer: Med Legal
 **Senior Software Developer** | *October 2018 - February 2021*
 - Developed custom C#/VB.NET ASP.NET 4.5 and WinForms applications that integrate with legacy, business, and accounting systems
 - Created Angular components, implemented state management, routing, forms validation, and application logic in TypeScript
@@ -28,7 +28,7 @@ Experienced full stack web developer specializing in .NET, C#, Angular, React, T
 - Integrated application data access layer with Entity Framework and LINQ
 - Wrote Cypress automated end-to-end web application testing scripts and nUnit tests
 
-### Innovative Way
+### Employer: Innovative Way
 **Full Stack Web Developer** | *September 2016 - February 2018*
 - Developed custom web applications with ASP.NET 4.5, C#, and JavaScript
 - Maintained existing software solutions by identifying and correcting software defects
@@ -36,14 +36,14 @@ Experienced full stack web developer specializing in .NET, C#, Angular, React, T
 - Refactored data access SQL stored procedures to Entity Framework ORM
 - Set up and managed TeamCity automated CI/CD build system
 
-### RPA
+### Employer: RPA
 **Senior Web Developer** | *July 2015 - September 2016*
 - Built promotional ASP.NET web applications for Honda automobiles public-facing website
 - Served as principal developer for Honda Home Team Hero and Honda Drive To Win kids games using Phaser JavaScript
 - Contributed to Farmers Insurance Hall Of Claims single-page application development
 - Developed software applications and databases to support various internal and external Windows/web-based systems
 
-### Promocodes.com
+### Employer: Promocodes.com
 **Full Stack Web Developer** | *June 2012 - February 2015*
 - Performed development, maintenance, and enhancements on consumer-facing websites using ASP.NET MVC 4, C#, jQuery, Entity Framework 6, LINQ, and SQL Server
 - Conducted hands-on coding, debugging, technical problem-solving, and testing of custom applications
@@ -52,7 +52,7 @@ Experienced full stack web developer specializing in .NET, C#, Angular, React, T
 - Updated and enhanced internal business analytics platform written in ASP.NET web forms
 - Engineered custom browser extensions for Chrome, Firefox, Safari, and Internet Explorer
 
-### The Phelps Agency
+### Employer: The Phelps Agency
 **Web Developer** | *September 2009 - March 2011*
 - Led development on publicstorage.com client website revamp project to rebuild property search, home page, and account billing interfaces
 - Maintained, enhanced, and debugged existing C# code and ASP.NET 3.5 web forms
