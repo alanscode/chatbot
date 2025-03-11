@@ -1,6 +1,5 @@
 const fs = require('fs').promises;
 const path = require('path');
-const fsSync = require('fs');
 
 exports.handler = async (event, context) => {
   // Always allow the specific origin
@@ -33,8 +32,6 @@ exports.handler = async (event, context) => {
     };
   }
 
-  const resumePath = path.join(__dirname, '../data/alan_nguyen_resume.md');
-
   try {
     const requestBody = JSON.parse(event.body);
     const { content } = requestBody;
@@ -50,7 +47,29 @@ exports.handler = async (event, context) => {
       };
     }
 
-    await fs.writeFile(resumePath, content, 'utf8');
+    // Use dynamic import for the netlify package
+    const { NetlifyAPI } = await import('netlify');
+
+    // Store content in environment variable using Netlify API
+    if (process.env.NETLIFY_API_TOKEN) {
+      const client = new NetlifyAPI(process.env.NETLIFY_API_TOKEN);
+      const siteId = process.env.SITE_ID;
+      
+      if (siteId) {
+        await client.updateSiteEnvVars({
+          siteId,
+          body: {
+            RESUME_CONTENT: content
+          }
+        });
+        console.log('Content stored in environment variable successfully');
+      } else {
+        console.error('SITE_ID environment variable not set');
+      }
+    } else {
+      console.error('NETLIFY_API_TOKEN environment variable not set');
+    }
+
     return {
       statusCode: 200,
       headers,
@@ -63,7 +82,7 @@ exports.handler = async (event, context) => {
       headers,
       body: JSON.stringify({
         error: 'Server error',
-        message: 'An unexpected error occurred'
+        message: error.message || 'An unexpected error occurred'
       })
     };
   }
