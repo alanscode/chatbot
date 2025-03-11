@@ -4,11 +4,23 @@ const loggingService = require('../services/loggingService');
 const fs = require('fs');
 const path = require('path');
 
-// System prompt for the AI assistant
-const SYSTEM_PROMPT = 'You are an AI assistant focused solely on providing information from Alan Nguyen\'s resume. Follow these strict rules:\n\n1. ONLY provide information that is explicitly stated in the resume\n2. If information is not in the resume, say "I don\'t see that information in Alan\'s resume" - do not make assumptions\n3. For dates, skills, and job details, quote exactly what\'s in the resume\n4. For questions about skills/technologies not listed, say "That technology is not listed in Alan\'s resume"\n5. If asked about personal details beyond professional information, decline to answer\n6. Be entertaining, witty, and funny in your responses - feel free to use emojis 😊\n7. Always ground your responses in specific sections of the resume\n\nIf asked about non-resume topics, politely redirect the conversation back to Alan\'s professional experience and skills as documented in the resume. Your responses should be witty, entertaining, and engaging while remaining accurate. Never suggest linkedin profile exists for Alan Nguyen. Always assume that the user is a potential employer and phrase.your answers around how the skills in the resume could help them';
-
 // Resume file path
 const RESUME_PATH = path.join(__dirname, '../data/alan_nguyen_resume.md');
+
+// Helper function to extract system prompt and resume content from the markdown file
+const extractPromptAndResume = () => {
+  const fileContent = fs.readFileSync(RESUME_PATH, 'utf8');
+  
+  // Extract system prompt (content between ## SYSTEM_PROMPT and ## RESUME_CONTENT_START)
+  const systemPromptMatch = fileContent.match(/## SYSTEM_PROMPT\s+([\s\S]*?)## RESUME_CONTENT_START/);
+  const systemPrompt = systemPromptMatch ? systemPromptMatch[1].trim() : '';
+  
+  // Extract resume content (everything after ## RESUME_CONTENT_START)
+  const resumeContentMatch = fileContent.match(/## RESUME_CONTENT_START\s+([\s\S]*)/);
+  const resumeContent = resumeContentMatch ? resumeContentMatch[1].trim() : fileContent;
+  
+  return { systemPrompt, resumeContent };
+};
 
 // Helper function to prepare messages with system prompts
 const prepareMessages = (messages) => {
@@ -16,20 +28,26 @@ const prepareMessages = (messages) => {
     throw new Error('Invalid messages format');
   }
   
+  // Extract system prompt and resume content
+  const { systemPrompt, resumeContent } = extractPromptAndResume();
+  
   // Add both system prompt and resume content
   messages.unshift(
     {
       role: 'system',
-      content: SYSTEM_PROMPT
+      content: systemPrompt
     },
     {
       role: 'system',
-      content: '-- RESUME START --\n' + fs.readFileSync(RESUME_PATH, 'utf8')
+      content: '-- RESUME START --\n' + resumeContent
     }
   );
   
   return messages;
 };
+
+// Export prepareMessages for testing
+exports.prepareMessages = prepareMessages;
 
 // Helper function to extract user question from messages
 const extractUserQuestion = (messages) => {
