@@ -24,6 +24,23 @@ const Header: React.FC = () => {
           </span>
         </div>
         <div className="text-sm text-slate-400">
+          <button 
+            className="relative px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-md font-medium flex items-center group overflow-hidden"
+            onClick={() => window.open('/resume.pdf', '_blank')}
+          >
+            {/* Animated background shine effect */}
+            <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-all duration-1000 ease-in-out"></span>
+            
+            {/* Pulsing glow effect */}
+            <span className="absolute inset-0 rounded-md opacity-0 group-hover:opacity-100 animate-[ping_2s_ease-in-out_infinite] bg-gradient-to-r from-purple-500/50 to-blue-500/50 blur-md"></span>
+            
+            <svg xmlns="http://www.w3.org/2000/svg" className="relative h-5 w-5 mr-2 group-hover:animate-bounce" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            <span className="relative font-bold tracking-wide">Download Resume</span>
+          </button>
         </div>
       </div>
     </header>

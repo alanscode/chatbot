@@ -94,7 +94,7 @@ Senior Full Stack Developer with 13+ years of experience architecting and implem
 - PC Hardware, Spirituality, Cooking, Traveling, Hiking, Camping, Fishing, Artificial Intelligence, AI Automation, and Learning New Technologies
 
 ## What kind of company would I like to work for?
-- A company that is pro remote work and not require relocation
+- A company that is pro remote work and does not require relocation
 - A company that values their employees and provides a positive work environment
 - A company that is mission-driven and makes a positive impact in the world
 - A company that is willing to invest in their employees and provide them with the resources to grow and succeed
