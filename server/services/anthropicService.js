@@ -13,7 +13,7 @@ const anthropic = new Anthropic({
 // Default model and parameters
 const DEFAULT_MODEL = 'claude-3-5-sonnet-latest';
 const DEFAULT_MAX_TOKENS = 4000;
-const DEFAULT_TEMPERATURE = 0.7;
+const DEFAULT_TEMPERATURE = 0.3;
 
 exports.sendMessage = async (messages, options = {}) => {
   try {
