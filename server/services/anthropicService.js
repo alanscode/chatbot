@@ -24,20 +24,30 @@ exports.sendMessage = async (messages, options = {}) => {
       throw new Error('No valid messages with content provided');
     }
     
-    const formattedMessages = validMessages.map(msg => ({
-      role: msg.role === 'user' ? 'user' : msg.role === 'system' ? 'system' : 'assistant',
-      content: msg.content
-    }));
+    const formattedMessages = validMessages
+      .filter(msg => msg.role !== 'system')
+      .map(msg => ({
+        role: msg.role === 'user' ? 'user' : 'assistant',
+        content: msg.content
+      }));
+
+    // Extract system messages
+    const systemMessages = validMessages
+      .filter(msg => msg.role === 'system')
+      .map(msg => msg.content)
+      .join('\n\n');
 
     console.log('Sending to Anthropic API:', {
       model: options.model || DEFAULT_MODEL,
       messages: formattedMessages,
+      system: systemMessages || undefined,
     });
 
     const response = await anthropic.messages.create({
       model: options.model || DEFAULT_MODEL,
       max_tokens: options.max_tokens || DEFAULT_MAX_TOKENS,
       messages: formattedMessages,
+      system: systemMessages || undefined,
       temperature: options.temperature || DEFAULT_TEMPERATURE,
     });
 
@@ -64,20 +74,30 @@ exports.streamMessage = async (messages, options = {}, onChunk) => {
       throw new Error('No valid messages with content provided');
     }
     
-    const formattedMessages = validMessages.map(msg => ({
-      role: msg.role === 'user' ? 'user' : msg.role === 'system' ? 'system' : 'assistant',
-      content: msg.content
-    }));
+    const formattedMessages = validMessages
+      .filter(msg => msg.role !== 'system')
+      .map(msg => ({
+        role: msg.role === 'user' ? 'user' : 'assistant',
+        content: msg.content
+      }));
+
+    // Extract system messages
+    const systemMessages = validMessages
+      .filter(msg => msg.role === 'system')
+      .map(msg => msg.content)
+      .join('\n\n');
 
     console.log('Streaming from Anthropic API:', {
       model: options.model || DEFAULT_MODEL,
       messages: formattedMessages,
+      system: systemMessages || undefined,
     });
 
     const stream = await anthropic.messages.create({
       model: options.model || DEFAULT_MODEL,
       max_tokens: options.max_tokens || DEFAULT_MAX_TOKENS,
       messages: formattedMessages,
+      system: systemMessages || undefined,
       temperature: options.temperature || DEFAULT_TEMPERATURE,
       stream: true,
     });
