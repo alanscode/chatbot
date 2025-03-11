@@ -1,7 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route  } from 'react-router-dom';
 import ChatInterface from './components/ChatInterface';
-import ResumeEditor from './components/ResumeEditor';
 import Header from './components/Header';
 import './styles/markdown-editor.css';
 
