@@ -87,12 +87,13 @@ Combines technical mastery with strategic problem-solving to build maintainable 
 - Optimized existing ASP.NET websites, improving performance and user experience
 
 ## TECHNICAL EXPERTISE
+- **AI Coding:**: Cusor IDE, Agentic Coding Workflows, MCP
+- **AI Automation:** n8n, Make, Zapier
 - **Languages:** TypeScript, JavaScript, C#, Python, SQL
 - **Frontend:** Next.js, React, Angular, ASP.NET, jQuery, Material UI, Tailwind, Responsive CSS
 - **Backend:** .NET, Node.js, Express API
 - **Database:** SQL Server, Entity Framework, LINQ, PostgreSQL, MySQL, MongoDB
 - **DevOps:** CI/CD Systems, Serverless Functions
-- **AI Integration:** OpenAI API, Anthropic API, Cursor, MCP, n8n, Make, Zapier
 - **Specialties:** Chrome Extensions, Single Page Applications, Modern Development Workflows
 
 ## EDUCATION
@@ -101,7 +102,7 @@ Combines technical mastery with strategic problem-solving to build maintainable 
 California Polytechnic State University, Pomona, California
 
 ## BEYOND THE CODE
-- Passionate about PC hardware, AI automation, and emerging technologies
+- Passionate about PC hardware, and emerging technologies
 - Enjoys spiritual growth, culinary exploration, and outdoor adventures
 - Continuously expanding technical knowledge through self-directed learning
 
