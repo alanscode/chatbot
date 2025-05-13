@@ -1,6 +1,6 @@
 # Chatbot Project
 
-A simple and intelligent chatbot application.
+A simple and intelligent chatbot application that answers questions about a resume.
 
 ## Features
 
